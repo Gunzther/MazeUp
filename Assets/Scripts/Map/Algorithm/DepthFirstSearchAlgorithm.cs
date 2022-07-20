@@ -67,23 +67,23 @@ namespace Map.Algorithm
         {
             if (currentBlock.Index.x - 1 >= 0)
             {
-                var leftNb = _blockDataArray[currentBlock.Index.x - 1, currentBlock.Index.z];
-                if (!leftNb.IsVisit) _neighbours.Add(leftNb);
+                var topNb = _blockDataArray[currentBlock.Index.x - 1, currentBlock.Index.z];
+                if (!topNb.IsVisit) _neighbours.Add(topNb);
             }
             if (currentBlock.Index.x + 1 < _width)
             {
-                var rightNb = _blockDataArray[currentBlock.Index.x + 1, currentBlock.Index.z];
-                if (!rightNb.IsVisit) _neighbours.Add(rightNb);
+                var bottomNb = _blockDataArray[currentBlock.Index.x + 1, currentBlock.Index.z];
+                if (!bottomNb.IsVisit) _neighbours.Add(bottomNb);
             }
             if (currentBlock.Index.z - 1 >= 0)
             {
-                var topNb = _blockDataArray[currentBlock.Index.x, currentBlock.Index.z - 1];
-                if (!topNb.IsVisit) _neighbours.Add(topNb);
+                var leftNb = _blockDataArray[currentBlock.Index.x, currentBlock.Index.z - 1];
+                if (!leftNb.IsVisit) _neighbours.Add(leftNb);
             }
             if (currentBlock.Index.z + 1 < _height)
             {
-                var bottomNb = _blockDataArray[currentBlock.Index.x, currentBlock.Index.z + 1];
-                if (!bottomNb.IsVisit) _neighbours.Add(bottomNb);
+                var rightNb = _blockDataArray[currentBlock.Index.x, currentBlock.Index.z + 1];
+                if (!rightNb.IsVisit) _neighbours.Add(rightNb);
             }
         }
 
