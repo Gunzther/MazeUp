@@ -1,3 +1,5 @@
+using UnityEngine;
+
 namespace Map.Data
 {
     public class BlockData
@@ -5,17 +7,28 @@ namespace Map.Data
         public bool[] WallActiveSides { get; private set; }
         public (int x, int z) Index { get; private set; }
         public (float x, float z) Position { get; private set; }
+        public Vector3 CenterPosition { get; private set; }
         public bool IsVisit { get; private set; }
 
-        public BlockData()
+        private float _blockSize;
+        private float _offset;
+
+        public BlockData(float blockSize)
         {
             WallActiveSides = new bool[4] { true, true, true, true };
             IsVisit = false;
+            _blockSize = blockSize;
+            _offset = blockSize / 2;
         }
 
         public void SetActiveSide(int side, bool isActive) => WallActiveSides[side] = isActive;
         public void SetIndex(int x, int z) => Index = (x, z);
-        public void SetPosition(float x, float z) => Position = (x, z);
+        public void SetPosition(float x, float z)
+        {
+            Position = (x, z);
+            CenterPosition = new Vector3(x - _offset, 0, z - _offset);
+        }
+
         public void SetIsVisit(bool isVisit) => IsVisit = isVisit;
     }
 

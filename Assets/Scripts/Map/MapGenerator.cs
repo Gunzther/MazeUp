@@ -31,13 +31,19 @@ namespace Map
         {
             ClearDebugPath();
 
+            string str = "";
+
             foreach (var data in path)
             {
+                str += $"{data.Index} > ";
+
                 if (_currentBlocks.TryGetValue(data, out Block block))
                 {
                     block.SetDebugFloorActive(true);
                 }
             }
+
+            Debug.Log(str);
         }
 
         public void ClearDebugPath()
@@ -48,12 +54,7 @@ namespace Map
             }
         }
 
-        private void OnEnable()
-        {
-            GenerateMap();
-        }
-
-        private void OnDisable()
+        public void ClearAll()
         {
             foreach (Transform child in transform)
             {
@@ -61,7 +62,7 @@ namespace Map
             }
         }
 
-        private void GenerateMap()
+        public void GenerateMap()
         {
             _blockSize = _blockPrototype.transform.localScale.x;
             _blockSize -= _blockSize / 10f; // remove double border
@@ -90,7 +91,7 @@ namespace Map
             {
                 for (int j = 0; j < height; j++)
                 {
-                    var blockData = new BlockData();
+                    var blockData = new BlockData(_blockSize);
                     blockData.SetIndex(i, j);
                     blockData.SetPosition(x: -i * blockSize, z: -j * blockSize);
                     blockDataArray[i, j] = blockData;

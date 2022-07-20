@@ -114,6 +114,7 @@ namespace PathFinding.Algorithm
         private List<BlockData> GetPath(CellData lastCell, CellData endCell)
         {
             List<BlockData> path = new List<BlockData>();
+            path.Add(endCell.BlockData);
             var temp = lastCell;
 
             while(temp.CameFrom != null)
@@ -122,7 +123,8 @@ namespace PathFinding.Algorithm
                 temp = temp.CameFrom;
             }
 
-            path.Add(endCell.BlockData);
+            path.Reverse();
+
             return path;
         }
 
