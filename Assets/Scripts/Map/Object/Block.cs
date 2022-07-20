@@ -8,7 +8,12 @@ namespace Map.Object
         [SerializeField]
         private GameObject[] _walls;
 
+        [SerializeField]
+        private GameObject _debugFloor;
+
         public void SetActive(bool isActive) => gameObject.SetActive(isActive);
+
+        public void SetDebugFloorActive(bool isActive) => _debugFloor.SetActive(isActive);
 
         public void Setup(BlockData data)
         {

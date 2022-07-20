@@ -1,6 +1,7 @@
 ﻿using Map.Algorithm;
 using Map.Data;
 using Map.Object;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Map
@@ -13,15 +14,38 @@ namespace Map
         [SerializeField]
         private int _mapSize;
 
+        public BlockData[,] BlockDataArray => _blockDataArray;
         private BlockData[,] _blockDataArray;
+        private Dictionary<BlockData, Block> _currentBlocks;
         private float _blockSize;
 
         public BlockData GetBlockByPoint(float xPos, float zPos)
         {
-            int x = Mathf.Clamp(Mathf.FloorToInt(-xPos /_blockSize), 0, _mapSize - 1);
-            int z = Mathf.Clamp(Mathf.FloorToInt(-zPos /_blockSize), 0, _mapSize - 1);
+            int x = Mathf.Clamp(Mathf.FloorToInt(-xPos / _blockSize), 0, _mapSize - 1);
+            int z = Mathf.Clamp(Mathf.FloorToInt(-zPos / _blockSize), 0, _mapSize - 1);
 
             return _blockDataArray[x, z];
+        }
+
+        public void DebugPath(List<BlockData> path)
+        {
+            ClearDebugPath();
+
+            foreach (var data in path)
+            {
+                if (_currentBlocks.TryGetValue(data, out Block block))
+                {
+                    block.SetDebugFloorActive(true);
+                }
+            }
+        }
+
+        public void ClearDebugPath()
+        {
+            foreach (var block in _currentBlocks.Values)
+            {
+                block.SetDebugFloorActive(false);
+            }
         }
 
         private void OnEnable()
@@ -47,12 +71,14 @@ namespace Map
             _blockDataArray = algo.CalculatePath();
 
             float yPos = _blockPrototype.transform.position.y;
+            _currentBlocks = new Dictionary<BlockData, Block>();
 
             foreach (var data in _blockDataArray)
             {
                 Block block = Instantiate(_blockPrototype, new Vector3(data.Position.x, yPos, data.Position.z), Quaternion.identity, transform);
                 block.Setup(data);
                 block.SetActive(true);
+                _currentBlocks.Add(data, block);
             }
         }
 
