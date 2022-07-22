@@ -410,6 +410,7 @@ MonoBehaviour:
   _botController: {fileID: 951533315}
   _playerController: {fileID: 52807500}
   _mapGenerator: {fileID: 1660258730}
+  _mapSize: 14
   _debugPath: 1
 --- !u!4 &1605969057
 Transform:
@@ -455,7 +456,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _blockPrototype: {fileID: 5305379288005663515, guid: c9a917f934e44eb4a9ce6c1b7197ffa9, type: 3}
-  _mapSize: 14
 --- !u!4 &1660258731
 Transform:
   m_ObjectHideFlags: 0

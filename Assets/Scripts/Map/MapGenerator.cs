@@ -11,16 +11,16 @@ namespace Map
         [SerializeField]
         private Block _blockPrototype;
 
-        [SerializeField]
-        private int _mapSize;
-
         public BlockData[,] BlockDataArray => _blockDataArray;
         private BlockData[,] _blockDataArray;
         private Dictionary<BlockData, Block> _currentBlocks;
         private float _blockSize;
+        private int _mapSize;
 
         public BlockData GetBlockByPoint(float xPos, float zPos)
         {
+            if (_blockDataArray == null) return null;
+
             int x = Mathf.Clamp(Mathf.FloorToInt(-xPos / _blockSize), 0, _mapSize - 1);
             int z = Mathf.Clamp(Mathf.FloorToInt(-zPos / _blockSize), 0, _mapSize - 1);
 
@@ -62,8 +62,9 @@ namespace Map
             }
         }
 
-        public void GenerateMap()
+        public void GenerateMap(int mapSize)
         {
+            _mapSize = mapSize;
             _blockSize = _blockPrototype.transform.localScale.x;
             _blockSize -= _blockSize / 10f; // remove double border
 

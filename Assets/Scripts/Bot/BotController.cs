@@ -27,6 +27,8 @@ namespace Bot
         private int _index = 0;
         private bool _isPlaying = false;
 
+        public void SetPosition(Vector3 position) => transform.position = position;
+
         public void SetPathFinder(PathFinder pathFinder) => _pathFinder = pathFinder;
 
         public void SetIsPlaying(bool isPlaying)
@@ -39,18 +41,13 @@ namespace Bot
         {
             if (!_isPlaying) return;
 
-            if (_index >= _IndexToFindNext)
-            {
-                FindNewPath();
-            }
             if (IsEquals(transform.position, _path[_index].CenterPosition))
             {
                 _index++;
-
-                if (_index  >= _path.Count)
-                {
-                    FindNewPath();
-                }
+            }
+            if (_index >= _IndexToFindNext || _index >= _path.Count)
+            {
+                FindNewPath();
             }
 
             transform.position = Vector3.MoveTowards(transform.position, _path[_index].CenterPosition, Time.deltaTime * _speed);
