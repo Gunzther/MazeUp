@@ -10,14 +10,12 @@ namespace Map.Data
         public Vector3 CenterPosition { get; private set; }
         public bool IsVisit { get; private set; }
 
-        private float _blockSize;
         private float _offset;
 
         public BlockData(float blockSize)
         {
             WallActiveSides = new bool[4] { true, true, true, true };
             IsVisit = false;
-            _blockSize = blockSize;
             _offset = blockSize / 2;
         }
 

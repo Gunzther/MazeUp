@@ -51,6 +51,7 @@ namespace Bot
             }
 
             transform.position = Vector3.MoveTowards(transform.position, _path[_index].CenterPosition, Time.deltaTime * _speed);
+            transform.LookAt(_path[_index].CenterPosition);
         }
 
         private void FindNewPath()
