@@ -7,6 +7,7 @@ namespace Map.Algorithm
     public class DepthFirstSearchAlgorithm : IMapAlgorithm
     {
         private const int _startIndex = 0;
+        private const int _randomRoutePossibility = 4; // 1/4
 
         private List<BlockData> _neighbours;
         private BlockData[,] _blockDataArray;
@@ -49,6 +50,7 @@ namespace Map.Algorithm
                 var choosen = _neighbours[index];
                 _blockDataStack.Push(choosen);
                 UpdateWallSideActive(currentBlock, choosen);
+                IncreaseEscapeRoute(currentBlock);
 
                 _visitCount++;
                 if (_visitCount >= _width * _height) return;
@@ -61,6 +63,16 @@ namespace Map.Algorithm
             }
 
             CalculatePath(currentBlock);
+        }
+
+        private void IncreaseEscapeRoute(BlockData currentBlock)
+        {
+            if (Random.Range(0, _randomRoutePossibility) == 0)
+            {
+                int index = Random.Range(0, _neighbours.Count);
+                var choosen = _neighbours[index];
+                UpdateWallSideActive(currentBlock, choosen);
+            }
         }
 
         private void UpdateNeighbours(BlockData currentBlock)
