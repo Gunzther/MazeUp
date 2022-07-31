@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4470394273077543627}
   - component: {fileID: 4470394273077543625}
   - component: {fileID: 4470394273077543624}
+  - component: {fileID: 2509108577378706640}
   m_Layer: 0
   m_Name: Bot
   m_TagString: Untagged
@@ -61,6 +62,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 1.8
   _IndexToFindNext: 4
+--- !u!54 &2509108577378706640
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4470394273077543626}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
 --- !u!1001 &4470394273086742915
 PrefabInstance:
   m_ObjectHideFlags: 0

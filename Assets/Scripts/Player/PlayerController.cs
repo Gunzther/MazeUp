@@ -10,6 +10,8 @@ namespace Player
         [SerializeField]
         private float _rotateSpeed = 0.08f;
 
+        public const string TAG = "Player";
+
         private void Update()
         {
             if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.D))

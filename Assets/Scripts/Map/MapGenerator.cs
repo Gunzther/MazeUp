@@ -42,8 +42,6 @@ namespace Map
                     block.SetDebugFloorActive(true);
                 }
             }
-
-            Debug.Log(str);
         }
 
         public void ClearDebugPath()

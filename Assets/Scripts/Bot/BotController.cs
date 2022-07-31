@@ -1,5 +1,6 @@
 ﻿using Map.Data;
 using PathFinding;
+using Player;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,7 @@ namespace Bot
         private int _IndexToFindNext = 4;
 
         public event Action<List<BlockData>> OnNewPathFound;
+        public event Action OnPlayerCaught;
 
         private const float _vectorOffset = 0.02f;
 
@@ -52,6 +54,14 @@ namespace Bot
 
             transform.position = Vector3.MoveTowards(transform.position, _path[_index].CenterPosition, Time.deltaTime * _speed);
             transform.LookAt(_path[_index].CenterPosition);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.CompareTag(PlayerController.TAG))
+            {
+                OnPlayerCaught?.Invoke();
+            }
         }
 
         private void FindNewPath()
